@@ -1,0 +1,208 @@
+/* --- Base Styles & Mobile First Approach --- */
+body.no-scroll {
+    overflow: hidden;
+}
+
+.navbar-header {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid #eaeaef;
+    padding: 0 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    height: 70px;
+}
+
+.navbar-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #5352ed 0%, #7117ea 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-emphasis-color: transparent;
+    position: relative;
+    z-index: 1002;
+}
+
+/* --- Mobile Menu --- */
+.navbar-links {
+    list-style: none;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 75%;
+    max-width: 480px;
+    height: 100vh;
+    background: white;
+    box-shadow: -5px 0 25px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    justify-content: center;
+    padding: 0 2rem;
+    gap: 3rem;
+    transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    z-index: 1001;
+}
+.navbar-links.open {
+    right: 0;
+}
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+.menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- Hamburger Menu Toggle --- */
+.menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 25px;
+    height: 21px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1002;
+}
+.menu-toggle .bar {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #333;
+    border-radius: 1px;
+    transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.menu-toggle[aria-expanded="true"] .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+.menu-toggle[aria-expanded="true"] .bar:nth-child(2) {
+    opacity: 0;
+}
+.menu-toggle[aria-expanded="true"] .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* --- Mobile Link & Button Styles --- */
+.nav-link {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #4a5568;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+.nav-link.active {
+    color: #1a202c;
+    font-weight: 600;
+}
+
+.navbar-button {
+    border: none;
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.navbar-button.primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+.navbar-button.secondary {
+    background-color: #f1f3f5;
+    color: #4a5568;
+}
+
+/* --- Desktop Styles (Tablet and up) --- */
+@media screen and (min-width: 769px) {
+    .navbar-header {
+        padding: 0 2.5rem;
+    }
+    .navbar-container {
+        max-width: 1200px;
+    }
+    .navbar-logo {
+        font-size: 1.6rem;
+    }
+    
+    .menu-toggle, .menu-overlay {
+        display: none;
+    }
+
+    .navbar-links {
+        position: static;
+        flex-direction: row;
+        height: auto;
+        width: auto;
+        background: none;
+        box-shadow: none;
+        padding: 0;
+        /* --- THE FIX: Adjusted gap between links --- */
+        gap: 2.2rem;
+    }
+
+    /* --- THE FIX: Add a margin to the left of action items --- */
+    .navbar-action-item {
+        margin-left: 1rem; /* Creates a visual separation */
+    }
+
+    .nav-link {
+        font-size: 1rem;
+        white-space: nowrap; /* Prevents "My History" from wrapping */
+    }
+
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #667eea;
+        border-radius: 2px;
+        transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .nav-link:hover::after,
+    .nav-link.active::after {
+        width: 100%;
+    }
+
+    .navbar-button {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+    .navbar-button.primary:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+    .navbar-button.secondary:hover {
+        background-color: #e9ecef;
+        transform: translateY(-1px);
+    }
+}

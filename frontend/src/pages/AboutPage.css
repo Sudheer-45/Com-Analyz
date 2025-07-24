@@ -1,0 +1,308 @@
+/* --- Base Container & Typography --- */
+.about-page-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 2rem 4rem 2rem;
+  background: #f9fbff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2d3748;
+  min-height: 100vh;
+  animation: fadeIn 0.6s ease forwards;
+}
+
+.page-header.about-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.page-header.about-header h2 {
+  font-weight: 800;
+  font-size: 2.8rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  letter-spacing: 0.02em;
+}
+
+.page-header.about-header p {
+  font-weight: 500;
+  font-size: 1.25rem;
+  color: #627d98;
+  line-height: 1.6;
+  max-width: 760px;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+
+
+/* --- Section Shared Styles --- */
+.about-section {
+  margin-bottom: 4.5rem;
+  animation: fadeInUp 0.7s ease forwards;
+}
+
+/* --- Mission & Vision Content Card --- */
+.about-content-card {
+  background-color: #ffffff;
+  padding: 2rem 2.5rem;
+  border-radius: 18px;
+  box-shadow: 0 10px 45px rgba(102, 126, 234, 0.1);
+  line-height: 1.6;
+  font-size: 1.1rem;
+  color: #394052;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.about-content-card h3 {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #344767;
+  margin-bottom: 1.25rem;
+}
+
+.about-content-card p:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+/* --- Core Values Grid --- */
+.core-values h3 {
+  font-weight: 700;
+  font-size: 2.2rem;
+  margin-bottom: 2.5rem;
+  color: #27374d;
+  text-align: center;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 2.8rem;
+}
+
+.value-item {
+  background: white;
+  box-shadow: 0 8px 32px rgb(102 126 234 / 0.15);
+  padding: 1.5rem 1.8rem;
+  border-radius: 20px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+}
+
+.value-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 40px rgb(102 126 234 / 0.25);
+}
+
+.value-icon {
+  font-size: 2.8rem;
+  color: #6573f5;
+  margin-bottom: 1rem;
+}
+
+.value-item h4 {
+  font-weight: 700;
+  font-size: 1.3rem;
+  margin-bottom: 0.8rem;
+  color: #28303f;
+  user-select: none;
+}
+
+.value-item p {
+  font-size: 1rem;
+  color: #506176;
+  line-height: 1.5;
+  user-select: none;
+}
+
+/* --- Team Section --- */
+.team-section h3 {
+  font-size: 2.3rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #2a2f4a;
+}
+
+.creator-card {
+  background: #ffffff;
+  max-width: 420px;
+  margin: 0 auto;
+  border-radius: 24px;
+  padding: 2.4rem 2.8rem 3rem;
+  box-shadow: 0 12px 48px rgb(102 126 234 / 0.15);
+  text-align: center;
+  transition: box-shadow 0.3s ease;
+}
+
+.creator-card:hover {
+  box-shadow: 0 18px 64px rgb(102 126 234 / 0.30);
+}
+
+.creator-avatar {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 1.8rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 20%, #764ba2 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 24px rgba(126, 75, 162, 0.25);
+}
+
+.creator-avatar-icon {
+  font-size: 90px;
+  color: white;
+}
+
+.creator-name {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #334e7e;
+  margin-bottom: 0.4rem;
+}
+
+.creator-role {
+  font-weight: 600;
+  font-size: 1.06rem;
+  color: #57668c;
+  margin-bottom: 1.2rem;
+}
+
+.creator-bio {
+  font-size: 1.03rem;
+  color: #46566a;
+  line-height: 1.55;
+  margin-bottom: 2.0rem;
+}
+
+.creator-social-links {
+  display: flex;
+  justify-content: center;
+  gap: 2.4rem;
+  font-weight: 600;
+}
+
+.creator-social-links a {
+  color: #667eea;
+  font-size: 1rem;
+  padding: 0.6rem 1.2rem;
+  background: rgba(102, 126, 234, 0.15);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.creator-social-links a:hover {
+  background: #667eea;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* --- Final Call-to-Action --- */
+.final-cta {
+  background-image: linear-gradient(135deg, #667eea 0%,#764ba2 100%);
+  border-radius: 28px;
+  padding: 2.8rem 3.5rem;
+  text-align: center;
+  color: white;
+  max-width: 700px;
+  margin: 0 auto;
+  box-shadow: 0 15px 55px rgba(118, 75, 162, 0.5);
+  animation: fadeInUp 0.7s ease 0.25s forwards;
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.final-cta h3 {
+  font-weight: 800;
+  font-size: 2.2rem;
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.02em;
+}
+
+.final-cta p {
+  font-size: 1.18rem;
+  margin-bottom: 2.2rem;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+.about-cta-button {
+  background: #fff;
+  color: #667eea;
+  font-weight: 700;
+  font-size: 1.12rem;
+  padding: 0.95rem 3rem;
+  border-radius: 40px;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.22);
+  display: inline-block;
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.about-cta-button:hover {
+  background: #5661d5;
+  color: white;
+  box-shadow: 0 12px 50px rgba(102, 120, 234, 0.65);
+}
+
+/* --- Animations for fadeInUp and fadeIn --- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(35px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  } 
+  to {
+    opacity: 1;
+  }
+}
+
+/* --- Responsive --- */
+@media (max-width: 767px) {
+  .about-content-card {
+    padding: 1.6rem 1.8rem;
+    font-size: 1rem;
+  }
+  .values-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .about-section.core-values h3,
+  .team-section h3,
+  .final-cta h3 {
+    font-size: 1.8rem;
+  }
+  .page-header.about-header h2 {
+    font-size: 2rem;
+  }
+  .final-cta {
+    padding: 2rem 1.8rem;
+  }
+  .creator-card {
+    max-width: 100%;
+    padding: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header.about-header p,
+  .about-content-card p {
+    font-size: 0.95rem;
+  }
+  .about-cta-button {
+    padding: 0.84rem 2.1rem;
+    font-size: 1rem;
+  }
+}

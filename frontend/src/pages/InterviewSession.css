@@ -1,0 +1,299 @@
+/* --- Base Container for Two-Panel Layout --- */
+.session-container-v2 {
+    display: flex;
+    flex-direction: column; /* Mobile-first: stack vertically */
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #f4f7f6;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* --- Top Panel (Mobile) / Left Panel (Desktop): Video/Voice --- */
+.video-preview-container {
+    flex: 1; /* Takes up all available space on the left */
+    position: relative;
+    background-color: #2d3748; /* Dark background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh; /* Takes top half on mobile */
+    width: 100%;
+}
+
+.video-feed-v2 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures video covers the panel without distortion */
+}
+
+.voice-only-visualizer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+.mic-icon {
+    font-size: 6rem;
+    opacity: 0.6;
+}   
+.mic-icon.pulsing {
+    opacity: 1;
+    animation: pulse-mic 2.5s ease-in-out infinite;
+}
+@keyframes pulse-mic {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+.voice-only-visualizer p {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-top: 1rem;
+    opacity: 0.8;
+}
+/* ... (existing CSS for .voice-only-visualizer) ... */
+.mic-icon.pulsing {
+    opacity: 1;
+    animation: pulse-mic 1.5s ease-in-out infinite;
+}
+@keyframes pulse-mic {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+/* ... */
+/* --- Status Pill (Always in the video area) --- */
+.video-overlay {
+    position: absolute;
+    top: 1.5rem;
+    z-index: 10;
+}
+.status-pill {
+    padding: 0.7rem 1.5rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    white-space: nowrap; /* Prevents text from wrapping */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+.status-pill.prepare { border-color: #ffc107; }
+.status-pill.ready { border-color: #17a2b8; }
+.status-pill.recording { background-color: #dc3545; border-color: transparent; }
+.status-pill.processing { background-color: #6c757d; border-color: transparent; }
+
+/* --- Bottom Panel (Mobile) / Right Panel (Desktop): Controls --- */
+.interview-panel {
+    width: 100%;
+    height: 50vh; /* Takes bottom half on mobile */
+    background-color: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    box-sizing: border-box;
+}
+
+/* --- Panel Header (Question Counter & Buttons) --- */
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-shrink: 0;
+    flex-wrap: wrap; /* Allow wrapping on very small screens */
+    gap: 0.5rem; /* Space between counter and button group */
+}
+.panel-question-counter {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #718096;
+}
+
+/* --- Group for Skip and Finish Buttons --- */
+.header-buttons-group {
+    display: flex;
+    gap: 0.75rem; /* Space between the two buttons */
+    align-items: center;
+    flex-wrap: wrap; /* Allow buttons to wrap if screen is too small */
+    margin-left: auto; /* Push group to the right */
+}
+
+/* --- Skip Question Button Styling --- */
+.skip-question-btn {
+    background: transparent;
+    border: 1px solid #ffc107; /* Orange border for skip */
+    color: #ffc107;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    font-size: 0.9rem;
+}
+
+.skip-question-btn:hover:not(:disabled) {
+    background-color: rgba(255, 193, 7, 0.1); /* Light orange background on hover */
+    border-color: #e0a800; /* Darker orange on hover */
+    transform: translateY(-1px);
+}
+
+.skip-question-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+/* --- Finish Session Button Styling (Existing, but now part of group) --- */
+.finish-early-btn-v2 {
+    background: transparent;
+    border: 1px solid #cbd5e0;
+    color: #718096;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    font-size: 0.9rem;
+}
+.finish-early-btn-v2:hover:not(:disabled) {
+    background-color: #f1f3f5;
+    border-color: #a0aec0;
+}
+.finish-early-btn-v2:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+/* --- Panel Progress Bar --- */
+.panel-progress-bar {
+    width: 100%;
+    height: 6px;
+    background-color: #e2e8f0;
+    border-radius: 3px;
+    margin-bottom: 1.5rem;
+    flex-shrink: 0;
+}
+.panel-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    border-radius: 3px;
+    transition: width 0.5s ease;
+}
+
+/* --- Panel Question Area --- */
+.panel-question-area {
+    flex-grow: 1;
+    background-color: #f7fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Allows scrolling only for very long questions */
+}
+.panel-question-area h3 {
+    font-size: 1rem;
+    color: #718096;
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+    flex-shrink: 0;
+}
+.panel-question-area p {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    color: #1a202c;
+    font-weight: 600;
+}
+
+/* --- Panel Controls (Main Action Buttons) --- */
+.panel-controls {
+    margin-top: 1.5rem;
+    text-align: center;
+    flex-shrink: 0;
+}
+.main-control-btn {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.main-control-btn.start { background-color: #2f855a; color: white; }
+.main-control-btn.start:hover { background-color: #276749; }
+.main-control-btn.stop { background-color: #c53030; color: white; }
+.main-control-btn.stop:hover { background-color: #9b2c2c; }
+.main-control-btn:disabled { background-color: #a0aec0; cursor: not-allowed; }
+.main-control-placeholder { height: 55px; } /* Prevents layout shift */
+
+
+/* --- Desktop and Tablet Styles (Side-by-Side Layout) --- */
+@media screen and (min-width: 901px) {
+    .session-container-v2 {
+        flex-direction: row; /* Switch to horizontal layout */
+    }
+
+    .video-preview-container {
+        height: 100vh; /* Full height */
+        flex: 1.5; /* Give it more space */
+    }
+    .mic-icon {
+        font-size: 8rem;
+    }
+
+    .interview-panel {
+        width: 480px; /* Fixed width for control panel */
+        min-width: 420px;
+        height: 100vh;
+        border-top: none;
+        border-left: 1px solid #e2e8f0;
+        padding: 2.5rem;
+        flex: none; /* Do not flex grow */
+    }
+
+    .panel-question-area p {
+        font-size: 1.6rem;
+    }
+}
+
+
+/* --- General Loading/Error States (No Change) --- */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    padding: 2rem;
+    background-color: #f4f7f6;
+}
+.loading-container h2 {
+    font-size: 1.8rem;
+    color: #2d3748;
+}
+.loading-container p {
+    font-size: 1.1rem;
+    color: #718096;
+    margin-top: 0.5rem;
+}
+.loading-container.error h3 {
+    color: #c53030;
+}
+.loading-container.error p {
+    max-width: 500px;
+    margin-top: 1rem;
+    color: #4a5568;
+}

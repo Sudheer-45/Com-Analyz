@@ -1,0 +1,45 @@
+    [
+      {
+        "emotion": "happy",
+        "description": "Joyful, pleased, showing contentment.",
+        "interviewContext": "Conveys enthusiasm, confidence, and positive engagement. Generally a good sign.",
+        "colorCode": "#4CAF50"
+      },
+      {
+        "emotion": "neutral",
+        "description": "Showing no strong feeling or emotion; impartial.",
+        "interviewContext": "Can indicate focus and professionalism, but sometimes lacks warmth or strong engagement.",
+        "colorCode": "#9E9E9E"
+      },
+      {
+        "emotion": "sad",
+        "description": "Feeling or showing sorrow; unhappy.",
+        "interviewContext": "May suggest low confidence or disengagement. Generally not ideal for an interview.",
+        "colorCode": "#FFC107"
+      },
+      {
+        "emotion": "angry",
+        "description": "Strong feeling of annoyance, displeasure, or hostility.",
+        "interviewContext": "Highly negative. Suggests frustration or lack of emotional control. Avoid in interviews.",
+        "colorCode": "#F44336"
+      },
+      {
+        "emotion": "fear",
+        "description": "An unpleasant emotion caused by the belief that someone or something is dangerous, likely to cause pain, or a threat.",
+        "interviewContext": "Can indicate nervousness or anxiety. Common, but ideally managed to show confidence.",
+        "colorCode": "#FF9800"
+      },
+      {
+        "emotion": "disgust",
+        "description": "A feeling of revulsion or strong disapproval aroused by something unpleasant or offensive.",
+        "interviewContext": "Highly negative. Suggests strong disapproval or discomfort. Avoid in interviews.",
+        "colorCode": "#795548"
+      },
+      {
+        "emotion": "surprise",
+        "description": "An unexpected or astonishing event, fact, or thing.",
+        "interviewContext": "Can be neutral or positive, showing engagement or quick thinking. Context-dependent.",
+        "colorCode": "#2196F3"
+      }
+    ]
+    

@@ -1,0 +1,517 @@
+/* src/components/ResultsPage.css */
+
+/* --- Keyframes for Animations --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Main Container & Background --- */
+.page-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem;
+    min-height: 100vh;
+    background: linear-gradient(170deg, #f3f5ff 0%, #eef2f7 100%);
+    animation: fadeIn 0.5s ease-out;
+    box-sizing: border-box; /* Ensure padding is included in width/height calculations */
+}
+
+/* Ensure body has no default margin/padding that could cause overflow */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
+    background-color: #f0f2f5; /* Light grey background from App.css */
+}
+
+
+/* --- Back Link --- */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+    color: #5352ed;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+    font-size: 0.95rem;
+}
+.back-link:hover {
+    transform: translateX(-4px);
+}
+
+/* --- Report Header --- */
+.result-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 1.5rem;
+    margin-bottom: 3rem;
+}
+.result-page-header .report-title h1 {
+    font-size: clamp(2rem, 4vw, 2.5rem); /* Fluid title size */
+    color: #1a202c;
+    font-weight: 700;
+    line-height: 1.2;
+    max-width: 100%;
+}
+.result-page-header .report-title p {
+    font-size: 0.95rem;
+    color: #718096;
+    margin-top: 0.25rem;
+}
+.overall-score-wrapper {
+    text-align: right;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    color: white;
+    min-width: 150px;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    flex-shrink: 0;
+}
+.score-label { display: block; font-size: 0.9rem; font-weight: 500; opacity: 0.8; }
+.score-value { font-size: 2.8rem; font-weight: 700; line-height: 1; }
+
+/* --- AI Summary Section --- */
+.summary-section {
+    background: rgba(255, 255, 255, 0.85); /* More opaque */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(102, 126, 234, 0.1);
+    
+    padding: 2.5rem;
+    border-radius: 16px;
+    margin-bottom: 3.5rem;
+}
+
+.summary-section h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #2d3748;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.summary-section h3::before {
+    content: '🤖';
+    font-size: 2rem;
+}
+.summary-section p { font-size: 1.1rem; line-height: 1.8; color: #4a5568; }
+
+/* --- Question Breakdown Section --- */
+.breakdown-section h3 {
+    font-size: clamp(1.8rem, 4vw, 2rem);
+    margin-bottom: 2rem;
+    color: #1a202c;
+    font-weight: 600;
+    text-align: center;
+}
+.questions-container { display: flex; flex-direction: column; gap: 2.5rem; }
+
+.question-card {
+    background: rgba(255, 255, 255, 0.9); /* More opaque */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+.question-card:hover {
+    box-shadow: 0 8px 32px 0 rgba(102, 126, 234, 0.15);
+    transform: translateY(-3px);
+}
+.question-card h4 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.transcript-box {
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    background-color: #f7fafc; /* Added for consistency */
+}
+.transcript-box strong { display: block; margin-bottom: 0.5rem; font-size: 1rem; color: #2d3748; }
+.transcript-box p { margin: 0; color: #4a5568; } /* Ensures inner p tags don't have default margin */
+
+.transcript-box.user-answer {
+    border-left: 4px solid #667eea;
+}
+
+/* --- NEW: Model Answer Toggle Button --- */
+.model-answer-toggle-btn {
+    /* Updated background to match screenshot's green */
+    background-color: #28a745; 
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem; /* Space below user answer */
+    margin-bottom: 1.5rem; /* Space before content/next section */
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+}
+.model-answer-toggle-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+}
+.model-answer-toggle-btn svg {
+    font-size: 1.1rem;
+}
+
+/* --- NEW: Model Answer Content (when visible) --- */
+.model-answer-content-v2 {
+    background-color: #e6ffed; /* Very light green background */
+    border: 1px solid #c6f6d5;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem; /* Space after model answer */
+    color: #22543d;
+    line-height: 1.7;
+    animation: fadeIn 0.3s ease-out; /* Smooth fade-in */
+}
+.model-answer-content-v2 p {
+    margin: 0; /* Remove default paragraph margin */
+}
+
+/* --- Key Points Section --- */
+.key-points-section {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem; /* Add bottom margin for spacing */
+}
+.key-points-section strong {
+    font-size: 1rem;
+    color: #4a5568;
+    margin-bottom: 0.75rem;
+    display: block;
+}
+.key-points-list {
+    list-style: none;
+    padding: 0;
+    display: flex; /* Changed to flex for horizontal pills */
+    flex-wrap: wrap; /* Allow wrapping */
+    gap: 0.75rem; /* Space between pills */
+}
+.key-points-list li {
+    padding: 0.4rem 0.8rem;
+    border-radius: 50px; /* Pill shape */
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    /* Default styling for pills */
+    background-color: #f0f2f5; /* Light background for default */
+    color: #4a5568; /* Default text color */
+    border: 1px solid #d1d5db; /* Subtle border */
+}
+/* Specific colors for mentioned/missed based on screenshot */
+.key-points-list li.mentioned { background-color: #e6ffed; color: #2f855a; border-color: #a8e6a8; } /* Light green, dark green text */
+.key-points-list li.missed { background-color: #ffebeb; color: #c53030; border-color: #ff6b6b; } /* Light red, dark red text */
+
+/* --- AI Feedback Section --- */
+.ai-feedback-section {
+    margin-top: 1.5rem;
+    padding: 1rem 1.5rem;
+    background-color: #f0e6ff; /* Light purple */
+    border-left: 4px solid #764ba2;
+    border-radius: 4px;
+}
+.ai-feedback-section p {
+    color: #44337a;
+    line-height: 1.6;
+}
+
+.ai-feedback-section strong {
+    color: #1e40af; /* Dark blue */
+}
+
+/* --- QA Metrics Section --- */
+.qa-metrics {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e2e8f0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Responsive grid for metrics */
+    gap: 1rem;
+}
+
+.qa-metric-item {
+    background: #f7fafc;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    text-align: center;
+}
+.metric-title { font-size: 0.85rem; font-weight: 500; color: #718096; margin-bottom: 0.5rem; display: block; }
+.metric-data { font-size: 1.1rem; font-weight: 600; color: #2d3748; }
+
+/* Specific styling for Emotion metric data (from previous version, kept for completeness) */
+/* These styles are applied via inline style in JSX, but can be moved here if needed */
+/* .emotion-display { text-align: center; margin-bottom: 0.5rem; } */
+/* .emotion-context-text { font-size: 0.85em; color: #555; margin-top: 0.25rem; line-height: 1.4; font-style: italic; } */
+
+
+/* --- NEW: Personalized Study Plan Section --- */
+.recommendations-section {
+    background: linear-gradient(135deg, #e0f2f7 0%, #d8e6f0 100%); /* Light blueish gradient */
+    padding: 2.5rem;
+    border-radius: 16px;
+    margin-bottom: 3.5rem;
+    border: 1px solid #cce7f2;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.recommendations-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+.recommendation-icon {
+    font-size: 2.2rem;
+    color: #007bff; /* Blue accent */
+}
+.recommendations-section h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2d3748;
+}
+
+.recommendations-description {
+    font-size: 1rem;
+    color: #4a5568;
+    margin-bottom: 1.5rem;
+}
+
+.recommendations-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+}
+.recommendations-list li {
+    background-color: white;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #4a5568;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.recommendation-item {
+    text-decoration: none;
+    color: #5352ed; /* Purple/blue from hero */
+    font-weight: 600;
+    transition: color 0.2s;
+    display: flex; /* Ensure it takes full width for flex-between */
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.recommendation-item:hover {
+    color: #3f3e9a;
+}
+.recommendation-item svg {
+    font-size: 1.1rem;
+}
+
+.recommendations-cta {
+    font-size: 0.95rem;
+    color: #718096;
+    text-align: center;
+}
+.recommendations-cta a {
+    color: #5352ed;
+    font-weight: 600;
+    text-decoration: underline;
+}
+.recommendations-cta a:hover {
+    color: #3f3e9a;
+}
+
+
+/* --- Go Home Button --- */
+.go-home-button {
+    display: block;
+    width: fit-content;
+    margin: 2.5rem auto 0; /* Center and space from sections above */
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Hero section gradient */
+    color: white;
+    border: none;
+    border-radius: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.go-home-button:hover {
+    background: linear-gradient(135deg, #5352ed 0%, #7117ea 100%); /* Darker gradient */
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+
+/* --- Responsive Design --- */
+
+/* Tablets (portrait) and large phones */
+@media screen and (max-width: 900px) {
+    .page-container {
+        padding: 2rem 1.5rem;
+    }
+    .result-page-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1.5rem;
+    }
+    .result-page-header .report-title h1 {
+        font-size: 2.2rem;
+    }
+    .result-page-header .report-title p {
+        font-size: 0.95rem;
+    }
+    .overall-score-wrapper {
+        min-width: unset;
+        width: 100%;
+        max-width: 200px;
+    }
+    .score-value {
+        font-size: 2rem;
+    }
+    .summary-section, .question-card {
+        padding: 1.5rem;
+    }
+    .summary-section h3 {
+        font-size: 1.5rem;
+    }
+    .summary-section h3::before { /* Smaller icon on mobile */
+        font-size: 1.8rem; /* Adjusted for better proportion */
+    }
+    .summary-section p {
+        font-size: 1rem;
+    }
+    .breakdown-section h3 {
+        font-size: 1.6rem;
+    }
+    .question-card h4 {
+        font-size: 1.15rem;
+    }
+    .qa-metrics {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 0.75rem;
+    }
+    .recommendations-section {
+        padding: 2rem;
+    }
+    .recommendations-section h3 {
+        font-size: 1.5rem;
+    }
+    .recommendation-icon {
+        font-size: 1.8rem;
+    }
+    .recommendations-list li {
+        font-size: 0.85rem;
+        padding: 0.6rem 1rem;
+    }
+    .recommendations-cta {
+        font-size: 0.8rem;
+    }
+}
+
+/* Small Phones */
+@media screen and (max-width: 600px) {
+    .page-container {
+        padding: 1.5rem 1rem;
+    }
+    .result-page-header .report-title h1 {
+        font-size: 1.8rem;
+    }
+    .result-page-header .report-title p {
+        font-size: 0.9rem;
+    }
+    .summary-section h3 {
+        font-size: 1.3rem;
+    }
+    .summary-section h3::before { /* Smaller icon on mobile */
+        font-size: 1.5rem; 
+    }
+    .summary-section p, .question-card p {
+        font-size: 0.9rem;
+    }
+    .question-card h4 {
+        font-size: 1rem;
+    }
+    .model-answer-toggle-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+    }
+    .key-points-section strong {
+        font-size: 0.9rem;
+    }
+    .key-points-list li {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.6rem;
+    }
+    .ai-feedback-section {
+        padding: 0.8rem 1rem;
+    }
+    .ai-feedback-section p {
+        font-size: 0.9rem;
+    }
+    .qa-metrics {
+        grid-template-columns: 1fr; /* Stack all metrics vertically */
+    }
+    .recommendations-section {
+        padding: 1.5rem;
+    }
+    .recommendations-section h3 {
+        font-size: 1.3rem;
+    }
+    .recommendation-icon {
+        font-size: 1.5rem;
+    }
+    .recommendations-list li {
+        font-size: 0.85rem;
+        padding: 0.6rem 1rem;
+    }
+    .recommendations-cta {
+        font-size: 0.8rem;
+    }
+}
+
+/* Very Small Phones (e.g., iPhone SE) */
+@media screen and (max-width: 400px) {
+    .page-container {
+        padding: 1rem 0.5rem;
+    }
+    .result-page-header .report-title h1 {
+        font-size: 1.5rem;
+    }
+    .summary-section, .question-card {
+        padding: 1rem;
+    }
+}

@@ -1,0 +1,267 @@
+/* src/components/JdChatSetupPage.css */
+
+/* JD Chat Setup Page */
+.jd-setup-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 80px); /* Adjust for navbar height */
+    background: linear-gradient(170deg, #f3f5ff 0%, #5e9ae3 100%); /* Matching HomePage background gradient */
+    padding: 1.5rem; /* Increased padding */
+    box-sizing: border-box; /* Include padding in element's total width and height */
+}
+
+.jd-setup-card {
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white for glassmorphism feel */
+    backdrop-filter: blur(10px); /* Glassmorphism blur */
+    -webkit-backdrop-filter: blur(10px); /* For Safari */
+    border-radius: 1.5rem; /* More rounded corners */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05); /* Deeper, softer shadow */
+    padding: 2.5rem; /* Increased padding */
+    width: 100%;
+    max-width: 52rem; /* Slightly wider card */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle border for glassmorphism */
+    transition: transform 0.3s ease-in-out; /* Smooth transition on hover (if applicable) */
+}
+
+.jd-setup-title {
+    font-size: 2.5rem; /* Larger title */
+    font-weight: 800; /* Extra bold */
+    text-align: center;
+    color: #2d3748; /* Darker, sophisticated text color from marketing */
+    margin-bottom: 1rem; /* Adjusted margin */
+    letter-spacing: -0.02em; /* Slight letter spacing for premium feel */
+}
+
+.jd-setup-subtitle {
+    font-size: 1.25rem; /* Larger subtitle */
+    text-align: center;
+    color: #4a5568; /* Softer text color from marketing */
+    margin-bottom: 2.5rem; /* Increased margin */
+    line-height: 1.6;
+}
+
+.jd-textarea-container {
+    margin-bottom: 1.5rem;
+}
+
+.jd-textarea {
+    width: 100%;
+    padding: 1.2rem; /* More padding */
+    font-size: 1.1rem; /* Slightly larger font */
+    border: 1px solid #d1d5db; /* Light grey border */
+    border-radius: 0.75rem; /* More rounded corners */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08); /* Inner shadow for depth */
+    resize: vertical;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    min-height: 250px; /* Minimum height for textarea */
+    line-height: 1.6;
+    color: #333; /* General dark text */
+    font-family: 'Inter', sans-serif; /* Ensure Inter font */
+}
+
+.jd-textarea::placeholder {
+    color: #999;
+}
+
+.jd-textarea:focus {
+    outline: none;
+    border-color: #667eea; /* Blue from marketing palette */
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.3); /* Softer focus ring */
+}
+
+.jd-file-upload-area {
+    margin-bottom: 2rem;
+    padding: 1.5rem; /* More padding */
+    border: 2px dashed #a7d9f7; /* Lighter dashed border */
+    border-radius: 1rem; /* More rounded */
+    background-color: rgba(255, 255, 255, 0.7); /* Slightly transparent for glassmorphism */
+    text-align: center;
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.jd-file-upload-area:hover {
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly darker on hover */
+    border-color: #7bc8f6; /* More prominent border on hover */
+}
+
+.jd-file-upload-label {
+    display: block;
+    color: #2d3748; /* Darker label color from marketing */
+    font-size: 1rem; /* Larger font */
+    font-weight: 600; /* Semi-bold */
+    margin-bottom: 0.8rem;
+    cursor: pointer;
+}
+
+.jd-file-input {
+    display: block;
+    width: 100%;
+    font-size: 0.95rem; /* Slightly larger font */
+    color: #4a5568; /* Softer text color from marketing */
+    font-family: 'Inter', sans-serif; /* Ensure Inter font */
+}
+
+.jd-file-input::file-selector-button {
+    margin-right: 1.2rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 2rem; /* More rounded pill shape */
+    border: 1px solid #667eea; /* Blue border from marketing */
+    font-size: 0.95rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Hero section gradient */
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.jd-file-input::file-selector-button:hover {
+    background: linear-gradient(135deg, #5352ed 0%, #7117ea 100%); /* Darker hero gradient on hover */
+    transform: translateY(-2px); /* Lift effect */
+    border-color: #5352ed;
+}
+
+.jd-selected-file-name {
+    margin-top: 0.8rem;
+    font-size: 0.9rem;
+    color: #4a5568; /* Softer text color from marketing */
+}
+
+.jd-error-message {
+    background-color: #ffebeb; /* Very light red */
+    border: 1px solid #ff6b6b; /* Brighter red border */
+    color: #d63031; /* Darker red text */
+    padding: 1rem 1.25rem;
+    border-radius: 0.75rem; /* More rounded */
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 0.95rem;
+    font-weight: 500;
+    box-shadow: 0 2px 5px rgba(255, 107, 107, 0.2); /* Subtle red shadow */
+}
+
+.jd-start-chat-button {
+    width: 100%;
+    padding: 1rem 2rem; /* More padding */
+    font-size: 1.4rem; /* Larger font */
+    font-weight: 700; /* Bold */
+    border-radius: 2rem; /* Very rounded */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Prominent shadow */
+    transition: background 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    font-family: 'Inter', sans-serif; /* Ensure Inter font */
+}
+
+.jd-start-chat-button:not(:disabled) {
+    background: linear-gradient(to right, #2ecc71, #27ae60); /* Green gradient from marketing */
+    color: white;
+}
+
+.jd-start-chat-button:not(:disabled):hover {
+    background: linear-gradient(to right, #27ae60, #2ecc71); /* Darker green on hover */
+    transform: translateY(-5px); /* Lift effect */
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3); /* Larger shadow on hover */
+}
+
+.jd-start-chat-button:disabled {
+    background-color: #cccccc; /* Lighter grey for disabled */
+    color: #888888;
+    cursor: not-allowed;
+    opacity: 0.8;
+    box-shadow: none;
+}
+
+/* Responsive Adjustments for Setup Page */
+@media (max-width: 1024px) { /* Adjust for smaller desktops/large tablets */
+    .jd-setup-card {
+        padding: 2rem;
+    }
+    .jd-setup-title {
+        font-size: 2.2rem;
+    }
+    .jd-setup-subtitle {
+        font-size: 1.1rem;
+    }
+    .jd-textarea {
+        min-height: 200px;
+    }
+    .jd-start-chat-button {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 768px) { /* Tablets */
+    .jd-setup-page {
+        padding: 1rem;
+    }
+    .jd-setup-card {
+        padding: 1.5rem;
+        border-radius: 1rem;
+    }
+    .jd-setup-title {
+        font-size: 2rem;
+        margin-bottom: 0.8rem;
+    }
+    .jd-setup-subtitle {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    .jd-textarea {
+        font-size: 1rem;
+        padding: 1rem;
+        min-height: 180px;
+    }
+    .jd-file-upload-area {
+        padding: 1rem;
+    }
+    .jd-file-upload-label {
+        font-size: 0.9rem;
+    }
+    .jd-file-input::file-selector-button {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+    }
+    .jd-error-message {
+        font-size: 0.85rem;
+        padding: 0.8rem 1rem;
+    }
+    .jd-start-chat-button {
+        font-size: 1.1rem;
+        padding: 0.8rem 1.5rem;
+    }
+}
+
+@media (max-width: 480px) { /* Mobile */
+    .jd-setup-page {
+        padding: 0.5rem;
+    }
+    .jd-setup-card {
+        padding: 1rem;
+        border-radius: 0.75rem;
+    }
+    .jd-setup-title {
+        font-size: 1.75rem;
+    }
+    .jd-setup-subtitle {
+        font-size: 0.9rem;
+    }
+    .jd-textarea {
+        font-size: 0.9rem;
+        padding: 0.8rem;
+        min-height: 150px;
+    }
+    .jd-file-upload-area {
+        padding: 0.8rem;
+    }
+    .jd-file-input::file-selector-button {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+    }
+    .jd-start-chat-button {
+        font-size: 1rem;
+        padding: 0.7rem 1.2rem;
+    }
+}

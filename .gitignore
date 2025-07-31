@@ -1,0 +1,36 @@
+# --- Python virtual environments ---
+venv/
+.venv/
+ai_service/ai-venv/
+
+# --- Bytecode, build, cache ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+build/
+dist/
+.eggs/
+*.egg-info/
+.pytest_cache/
+.tox/
+.mypy_cache/
+
+# --- Node.js/React ---
+node_modules/
+build/
+dist/
+.yarn/
+.cache/
+.parcel-cache/
+
+# --- Logs ---
+logs/
+*.log
+
+# --- Editor/OS specific ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini

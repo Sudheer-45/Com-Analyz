@@ -23,3 +23,7 @@ keras==2.13.1
 deepface==0.0.79
 # We add the new Google AI library here, it will use the compatible packages above
 google-generativeai
+flask
+tensorflow  
+opencv-python-headless
+numpy

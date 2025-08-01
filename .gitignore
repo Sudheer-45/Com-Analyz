@@ -2,6 +2,8 @@
 venv/
 .venv/
 ai_service/ai-venv/
+*.h5
+*.tflite
 
 # --- Bytecode, build, cache ---
 __pycache__/

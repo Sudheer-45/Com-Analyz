@@ -14,6 +14,7 @@ from flask_cors import CORS
 from pydub import AudioSegment
 import google.generativeai as genai
 from dotenv import load_dotenv
+from routes.emotion_route import emotion_blueprint
 
 # --- ROBUST .ENV LOADING ---
 # This is the definitive fix for API key issues. It finds the .env file
@@ -24,6 +25,8 @@ load_dotenv(os.path.join(basedir, '.env'))
 # --- APP AND AI CONFIGURATION ---
 app = Flask(__name__)
 CORS(app)
+
+app.register_blueprint(emotion_blueprint, url_prefix="/emotion")
 
 try:
     api_key = os.environ.get('GOOGLE_API_KEY')

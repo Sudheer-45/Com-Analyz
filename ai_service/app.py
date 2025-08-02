@@ -16,6 +16,7 @@ import google.generativeai as genai
 from dotenv import load_dotenv
 from routes.emotion_route import emotion_blueprint
 
+
 # --- ROBUST .ENV LOADING ---
 # This is the definitive fix for API key issues. It finds the .env file
 # relative to this script's location, no matter where you run it from.
@@ -54,26 +55,75 @@ def check_ai_config():
         return False
 
 # --- API ENDPOINTS ---
+from flask import request, jsonify
+import json
+import re
+import google.generativeai as genai
 
 @app.route('/generate-questions', methods=['POST'])
 def generate_questions_route():
-    if not check_ai_config(): return jsonify({"error": "AI service is not configured correctly."}), 503
-    if not request.json or 'prompt' not in request.json: return jsonify({"error": "Prompt required"}), 400
-    
+    if not check_ai_config(): 
+        return jsonify({"error": "AI service is not configured correctly."}), 503
+
+    if not request.json or 'prompt' not in request.json: 
+        return jsonify({"error": "Prompt required"}), 400
+
     user_prompt = request.json['prompt']
-    full_prompt = f"""Based on the user request: \"{user_prompt}\", generate 8 interview questions. Your response MUST be a valid JSON array of objects. Each object must have THREE keys: "question", "keyPoints", and "modelAnswer"."""
+    
     try:
-        model = genai.GenerativeModel(STABLE_GEMINI_MODEL)
-        response = model.generate_content(full_prompt)
-        cleaned_text = response.text.strip().replace("```json", "").replace("```", "")
-        questions = json.loads(cleaned_text)
-        # Add the validation check back in
-        if not isinstance(questions, list) or not all("question" in q and "keyPoints" in q and "modelAnswer" in q for q in questions):
-            raise ValueError("LLM response did not match the required format.")
-        return jsonify(questions)
+        generation_config = genai.types.GenerationConfig(
+            temperature=0.7,
+            top_p=0.9,
+            top_k=40,
+            max_output_tokens=1024
+        )
+
+        model = genai.GenerativeModel(
+            model_name=STABLE_GEMINI_MODEL,
+            generation_config=generation_config
+        )
+
+        collected_questions = []
+        attempts = 0
+        used_questions_set = set()
+
+        while len(collected_questions) < 8 and attempts < 3:
+            remaining = 8 - len(collected_questions)
+
+            prompt = f"""
+Based on the user request: \"{user_prompt}\", generate {remaining} interview questions.
+Only generate questions that are DIFFERENT from the ones already listed below:
+{[q["question"] for q in collected_questions]}
+
+Respond strictly as a JSON array. Each item must have these three fields:
+"question", "keyPoints", and "modelAnswer".
+"""
+
+            response = model.generate_content(prompt)
+            raw_text = response.text.strip().replace("```json", "").replace("```", "")
+            json_objects = re.findall(r'{.*?}', raw_text, re.DOTALL)
+
+            for obj in json_objects:
+                try:
+                    parsed = json.loads(obj)
+                    if all(k in parsed for k in ["question", "keyPoints", "modelAnswer"]):
+                        q_text = parsed["question"].strip()
+                        if q_text not in used_questions_set:
+                            collected_questions.append(parsed)
+                            used_questions_set.add(q_text)
+                except Exception:
+                    continue
+
+            attempts += 1
+
+        if len(collected_questions) < 8:
+            return jsonify({"error": f"Only {len(collected_questions)} questions could be generated after retries."}), 500
+
+        return jsonify(collected_questions)
+
     except Exception as e:
         print(f"ERROR in /generate-questions: {e}")
-        return jsonify({"error": "Failed to generate questions. The AI may be unavailable."}), 500
+        return jsonify({"error": "Failed to generate 8 complete questions."}), 500
 
 @app.route('/analyze', methods=['POST'])
 def analyze_media_route():
@@ -103,7 +153,7 @@ def analyze_media_route():
             audio_data = recognizer.record(source)
             text_result = recognizer.recognize_google(audio_data)
             # We need to import TextBlob for sentiment analysis
-            from textblob import TextBlob
+            
             sentiment_score = TextBlob(text_result).sentiment.polarity
             filler_words_result = analyze_filler_words(text_result)
             if duration > 0: wpm_result = round((len(text_result.split()) / duration) * 60)

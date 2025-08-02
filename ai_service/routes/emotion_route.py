@@ -12,7 +12,7 @@ emotion_blueprint = Blueprint('emotion', __name__)
 emotion_labels = ['Angry', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral']
 
 # Load the .tflite model
-interpreter = tflite.Interpreter(model_path="model/emotion_model.tflite")
+interpreter = tf.lite.Interpreter(model_path="model/emotion_model.tflite")
 interpreter.allocate_tensors()
 
 # Get input/output tensor details
